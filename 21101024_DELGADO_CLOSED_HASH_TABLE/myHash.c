@@ -10,7 +10,7 @@ int getHash(Student s){
     int hash = 0;
     for (int i=0;i<31;++i){
         if ((s.studID >> i) & 1 == 1){
-            hash+=i+1;
+            ++hash;
         }
     }
     return hash % MAX;
@@ -28,11 +28,10 @@ void resizeDictionary(StudDictionary *d){
     temp.data = calloc(temp.max, sizeof(Student));
     temp.count = 0;
     
-    for (int i=0;i<d->max;){
+    for (int i=0;i<d->max;++i){
         if (d->data[i].studID > 0){
             insertStud(&temp, d->data[i]);
         }
-        ++i;
     }
     *d = temp;
     free(temp.data);
